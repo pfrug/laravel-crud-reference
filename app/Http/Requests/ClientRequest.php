@@ -25,7 +25,7 @@ abstract class ClientRequest extends FormRequest
             'phone_1' => 'nullable|string|max:20',
             'phone_2' => 'nullable|string|max:20',
             'accounting_code' => 'nullable|string|max:50',
-            'billing_by_ref' => 'nullable|string|max:50',
+            'billing_by_ref' => 'boolean',
             'country_id' => 'required|exists:countries,id',
             'payment_term_id' => 'required|exists:payment_terms,id',
             'client_group_id' => 'required|exists:client_groups,id',

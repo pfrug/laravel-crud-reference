@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'test@example.com',
-            'password' => Hash::make('admin221')
+            'password' => Hash::make('secret123')
         ]);
 
         $countries = Country::factory()->count(10)->create();
