@@ -87,3 +87,8 @@ Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expues
 ```bash
 ./vendor/bin/phpunit
 ```
+
+---
+## Colección de Postman
+Colección de Postman disponible para consulta y prueba de los endpoints expuestos por la API:
+postman/AS400_demo.postman_collection.json
