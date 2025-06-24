@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidSpanishNif;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreClientRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'tax_id' => 'nullable|string|max:15',
+            'tax_id' => ['nullable', 'string', 'max:15', new ValidSpanishNif],
             'foreign_tax_id' => 'nullable|string|max:15',
             'email' => 'required|email|max:255|unique:clients,email',
             'address' => 'nullable|string|max:255',

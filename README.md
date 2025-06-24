@@ -1,62 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Descripción General
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una demostración funcional de la arquitectura propuesta por CGI, desarrollada con Laravel 12. Sirve como referencia inicial y no representa el alcance final del sistema real.
+La arquitectura está diseñada para aplicaciones desacopladas, orientadas a servicios, y con un enfoque en buenas prácticas de desarrollo backend.
+Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expuesto a través de una API RESTful. La intención principal es demostrar una estructura limpia, coherente y extensible para aplicaciones modernas.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Funcionalidad Incluida
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Clientes (CRUD)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Gestión completa de clientes: alta, baja, modificación y consulta.
+- Validaciones robustas usando **Form Requests**, incluyendo validaciones personalizadas (como NIF español).
+- Serialización de modelos mediante **Laravel API Resources** para estructurar la salida JSON.
+- Lógica de negocio aislada mediante clases de servicio (**Services**).
+- Uso de **eventos y listeners** para ejecutar lógica desacoplada como el envío de correos.
+- Envío automático de correo de bienvenida al crear un cliente (**WelcomeClientMail**).
+- Arquitectura desacoplada en capas, alineada con principios **SOLID**.
+- Tests automatizados con **PHPUnit** para garantizar funcionalidad y estabilidad.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Endpoints disponibles
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Autenticación
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- `POST /api/login` — Inicio de sesión usando JWT.
+- `GET /api/me` — Obtener información del usuario autenticado.
+- `POST /api/logout` — Cierre de sesión.
 
-## Laravel Sponsors
+### Datos auxiliares
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- `GET /api/countries` — Listado de países.
+- `GET /api/client-groups` — Grupos de clientes.
+- `GET /api/payment-terms` — Condiciones de pago.
+- `GET /api/sales-reps` — Representantes de ventas.
 
-### Premium Partners
+### Gestión de Clientes
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- `GET /api/clients` — Listado paginado de clientes.
+- `POST /api/clients` — Crear un nuevo cliente.
+- `GET /api/clients/{id}` — Ver un cliente específico.
+- `PUT /api/clients/{id}` — Actualizar cliente completo.
+- `PATCH /api/clients/{id}` — Actualización parcial.
+- `DELETE /api/clients/{id}` — Eliminar cliente.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Arquitectura y Buenas Prácticas Aplicadas
 
-## Code of Conduct
+- **Form Requests**: encapsulan reglas de validación reutilizables.
+- **API Resources**: controlan la transformación de modelos antes de exponerlos al cliente.
+- **Services**: encapsulan la lógica de negocio, manteniendo los controladores delgados y simples.
+- **Events & Listeners**: desacoplan acciones secundarias como notificaciones o tareas asincrónicas.
+- **Queued Mailables**: los correos electrónicos son enviados a través del sistema de colas de Laravel, evitando bloqueos durante la ejecución de peticiones HTTP. El envío de mails, como el correo de bienvenida al crear un cliente, se maneja mediante `Mailable` encolados, configurados para ejecutarse en segundo plano mediante `queue()`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Setup Inicial
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Instalar dependencias:
+   ```bash
+   composer install
+   ```
 
-## License
+2. Configurar entorno:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# sidetours
+3. Ejecutar migraciones y seeders:
+   ```bash
+   php artisan migrate --seed
+   ```
+
+4. Levantar entorno local con Docker (Laravel Sail):
+   ```bash
+   ./vendor/bin/sail up -d
+   ```
+
+---
+
+## Para ejecutar tests
+
+```bash
+./vendor/bin/phpunit
+```

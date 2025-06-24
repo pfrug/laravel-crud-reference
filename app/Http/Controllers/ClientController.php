@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PatchClientRequest;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
@@ -51,6 +52,17 @@ class ClientController extends Controller
     }
 
     public function update(UpdateClientRequest $request, Client $client): JsonResponse
+    {
+        try {
+            $client = $this->clientService->updateClient($client, $request->validated());
+            return response()->json(new ClientResource($client));
+        } catch (\Throwable $e) {
+            Log::error('Failed to update client', ['exception' => $e]);
+            return response()->json(['message' => 'Failed to update client'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function patch(PatchClientRequest $request, Client $client)
     {
         try {
             $client = $this->clientService->updateClient($client, $request->validated());

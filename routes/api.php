@@ -15,6 +15,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::apiResource('clients', ClientController::class);
+    Route::patch('clients/{client}', [ClientController::class, 'patch']);
+
     Route::apiResource('countries', CountryController::class)->only(['index']);
     Route::apiResource('client-groups', ClientGroupController::class)->only(['index']);
     Route::apiResource('payment-terms', PaymentTermController::class)->only(['index']);
