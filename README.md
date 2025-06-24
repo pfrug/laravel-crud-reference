@@ -82,7 +82,7 @@ Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expues
 
 ---
 
-## Para ejecutar tests
+## Ejecutar los tests
 
 ```bash
 ./vendor/bin/phpunit
