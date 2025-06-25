@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:api')->group(function () {
+
     Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
 
@@ -21,4 +21,4 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('client-groups', ClientGroupController::class)->only(['index']);
     Route::apiResource('payment-terms', PaymentTermController::class)->only(['index']);
     Route::apiResource('sales-reps', SalesRepController::class)->only(['index']);
-});
+
