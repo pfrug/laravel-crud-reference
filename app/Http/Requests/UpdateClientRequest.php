@@ -2,20 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Helpers\Sanitizers;
 use App\Rules\ValidSpanishNif;
-use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClientRequest extends FormRequest
+class UpdateClientRequest extends ClientRequest
 {
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'tax_id' => Sanitizers::alphanumeric($this->input('tax_id')),
-            'foreign_tax_id' => Sanitizers::alphanumeric($this->input('foreign_tax_id')),
-        ]);
-    }
 
     public function rules(): array
     {

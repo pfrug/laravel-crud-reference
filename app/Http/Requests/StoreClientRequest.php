@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Rules\ValidSpanishNif;
-use Illuminate\Foundation\Http\FormRequest;
 
-class StoreClientRequest extends FormRequest
+class StoreClientRequest extends ClientRequest
 {
     public function rules(): array
     {
