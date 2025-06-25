@@ -2,18 +2,29 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\Sanitizers;
+use App\Rules\ValidSpanishNif;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateClientRequest extends FormRequest
 {
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'tax_id' => Sanitizers::alphanumeric($this->input('tax_id')),
+            'foreign_tax_id' => Sanitizers::alphanumeric($this->input('foreign_tax_id')),
+        ]);
+    }
+
     public function rules(): array
     {
         return [
             'name' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
-            'tax_id' => 'nullable|string|max:15',
-            'foreign_tax_id' => 'nullable|string|max:15',
-            'email' => 'sometimes|required|email|max:255|unique:clients,email,' . $this->route('client'),
+            'tax_id' => ['nullable', 'string', 'max:15', new ValidSpanishNif],
+            'foreign_tax_id' => ['nullable', 'string', 'max:15', new ValidSpanishNif],
+            'email' => 'sometimes|required|email|max:255|unique:clients,email,' . $this->route('client')->id,
             'address' => 'nullable|string',
             'postal_code' => 'nullable|string|max:10',
             'city' => 'nullable|string|max:255',

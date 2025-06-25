@@ -2,18 +2,20 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidSpanishNif;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PatchClientRequest extends FormRequest
 {
+
     public function rules(): array
     {
         return [
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
-            'tax_id' => 'sometimes|nullable|string|max:15',
-            'foreign_tax_id' => 'sometimes|nullable|string|max:15',
-            'email' => 'sometimes|required|email|max:255|unique:clients,email,' . $this->route('client'),
+            'tax_id' => ['sometimes', 'nullable', 'string', 'max:15', new ValidSpanishNif],
+            'foreign_tax_id' => ['sometimes', 'nullable', 'string', 'max:15', new ValidSpanishNif],
+            'email' => 'sometimes|required|email|max:255|unique:clients,email,' . $this->route('client')->id,
             'address' => 'sometimes|nullable|string',
             'postal_code' => 'sometimes|nullable|string|max:10',
             'city' => 'sometimes|nullable|string|max:255',

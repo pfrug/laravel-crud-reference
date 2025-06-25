@@ -9,6 +9,6 @@ class SalesRepController extends Controller
 {
     public function index()
     {
-        return SalesRepResource::collection(SalesRep::all());
+        return SalesRepResource::collection(SalesRep::all())->resolve();
     }
 }

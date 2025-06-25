@@ -16,11 +16,13 @@ class ClientFactory extends Factory
      */
     public function definition(): array
     {
+        $fakerLocale = \Faker\Factory::create('es_ES');
+
         return [
             'name' => $this->faker->company(),
             'description' => $this->faker->catchPhrase(),
-            'tax_id' => $this->faker->regexify('[A-Z0-9]{9}'),
-            'foreign_tax_id' => $this->faker->optional()->regexify('[A-Z0-9]{9}'),
+            'tax_id' => $fakerLocale->dni(),
+            'foreign_tax_id' => $fakerLocale->dni(),
             'email' => $this->faker->unique()->safeEmail(),
             'address' => $this->faker->address(),
             'postal_code' => $this->faker->postcode(),

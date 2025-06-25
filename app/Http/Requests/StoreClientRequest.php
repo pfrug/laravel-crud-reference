@@ -13,7 +13,7 @@ class StoreClientRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'tax_id' => ['nullable', 'string', 'max:15', new ValidSpanishNif],
-            'foreign_tax_id' => 'nullable|string|max:15',
+            'foreign_tax_id' => ['nullable', 'string', 'max:15', new ValidSpanishNif],
             'email' => 'required|email|max:255|unique:clients,email',
             'address' => 'nullable|string|max:255',
             'postal_code' => 'nullable|string|max:10',

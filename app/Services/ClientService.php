@@ -10,7 +10,9 @@ class ClientService
 {
     public function listClients(int $perPage = 15)
     {
-        return Client::with(['country', 'paymentTerm', 'clientGroup', 'salesRep'])->paginate($perPage);
+        return Client::with(['country', 'paymentTerm', 'clientGroup', 'salesRep'])
+            ->orderBy('id', 'desc')
+            ->paginate($perPage);
     }
 
     public function createClient(array $data): Client

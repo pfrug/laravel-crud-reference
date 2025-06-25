@@ -10,6 +10,6 @@ class PaymentTermController extends Controller
 {
     public function index()
     {
-        return PaymentTermResource::collection(PaymentTerm::all());
+        return PaymentTermResource::collection(PaymentTerm::all())->resolve();
     }
 }

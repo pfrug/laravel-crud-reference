@@ -10,6 +10,6 @@ class ClientGroupController extends Controller
 {
     public function index()
     {
-        return ClientGroupResource::collection(ClientGroup::all());
+        return ClientGroupResource::collection(ClientGroup::all())->resolve();
     }
 }
