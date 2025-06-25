@@ -2,7 +2,7 @@
 
 Este proyecto es una demostración funcional de la arquitectura propuesta por CGI, desarrollada con Laravel 12. Sirve como referencia inicial y no representa el alcance final del sistema real.
 La arquitectura está diseñada para aplicaciones desacopladas, orientadas a servicios, y con un enfoque en buenas prácticas de desarrollo backend.
-Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expuesto a través de una API RESTful. La intención principal es demostrar una estructura limpia, coherente y extensible para aplicaciones modernas.
+Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expuesto a través de una API RESTful.
 
 ---
 
@@ -18,6 +18,23 @@ Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expues
 - Envío automático de correo de bienvenida al crear un cliente (**WelcomeClientMail**).
 - Arquitectura desacoplada en capas, alineada con principios **SOLID**.
 - Tests automatizados con **PHPUnit** para garantizar funcionalidad y estabilidad.
+
+---
+
+## Capas de Arquitectura
+
+Con esta demo se pretende establecer una guía de referencia para la implementación de una arquitectura en capas recomendada para el desarrollo del sistema final. El objetivo es ilustrar cómo estructurar un proyecto Laravel utilizando componentes desacoplados que favorezcan la escalabilidad, la mantenibilidad y la separación de responsabilidades. Estas capas, agregadas manualmente sobre la estructura básica del framework, representan una forma de organización que facilita el trabajo en equipo, las pruebas automatizadas y la evolución del sistema a largo plazo.
+
+- **Events**: para emitir acciones del sistema de forma desacoplada.
+- **Listeners**: capturan y manejan eventos, como el envío de correos.
+- **Mail**: definición de correos estructurados usando Mailables, enviados encolados para evitar bloqueos durante la petición HTTP.
+- **Services**: lógica de negocio encapsulada, separada del controlador.
+- **Rules**: validaciones personalizadas para campos complejos.
+- **Helpers**: funciones auxiliares reutilizables en todo el sistema.
+- **Http**:
+  - `Requests`: validaciones encapsuladas vía FormRequest.
+  - `Resources`: transformación de modelos a estructuras JSON controladas.
+- **Providers**: configuración personalizada, como el `EventServiceProvider`.
 
 ---
 
@@ -47,16 +64,6 @@ Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expues
 
 ---
 
-## Arquitectura y Buenas Prácticas Aplicadas
-
-- **Form Requests**: encapsulan reglas de validación reutilizables.
-- **API Resources**: controlan la transformación de modelos antes de exponerlos al cliente.
-- **Services**: encapsulan la lógica de negocio, manteniendo los controladores delgados y simples.
-- **Events & Listeners**: desacoplan acciones secundarias como notificaciones o tareas asincrónicas.
-- **Queued Mailables**: los correos electrónicos son enviados a través del sistema de colas de Laravel, evitando bloqueos durante la ejecución de peticiones HTTP. El envío de mails, como el correo de bienvenida al crear un cliente, se maneja mediante `Mailable` encolados, configurados para ejecutarse en segundo plano mediante `queue()`.
-
----
-
 ## Setup Inicial
 
 1. Instalar dependencias:
@@ -82,8 +89,13 @@ Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expues
 
 ---
 
-## Para ejecutar tests
+## Ejecutar los tests
 
 ```bash
 ./vendor/bin/phpunit
 ```
+
+---
+## Colección de Postman
+Colección de Postman disponible para consulta y prueba de los endpoints expuestos por la API:
+postman/AS400_demo.postman_collection.json
