@@ -12,8 +12,9 @@ class SendWelcomeEmail implements ShouldQueue
     public function handle(ClientCreated $event): void
     {
         $client = $event->client;
+
         if ($client->email) {
-            Mail::to($client->email)->send(new WelcomeClientMail($client));
+            Mail::to($client->email)->queue(new WelcomeClientMail($client));
         }
     }
 }

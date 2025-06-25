@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Events\ClientCreated;
 use App\Models\Client;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ClientService
 {
