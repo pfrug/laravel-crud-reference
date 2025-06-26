@@ -84,6 +84,7 @@ Con esta demo se pretende establecer una guía de referencia para la implementac
 
 4. Levantar entorno local con Docker (Laravel Sail):
    ```bash
+   ./vendor/bin/sail build
    ./vendor/bin/sail up -d
    ```
 
