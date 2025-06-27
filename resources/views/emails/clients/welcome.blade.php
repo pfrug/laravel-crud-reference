@@ -1,1 +1,1 @@
-Hello {{ $client->name }}, welcome to Sidetours!
+Hello {{ $client->name }}, welcome to Company!
