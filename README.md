@@ -2,6 +2,7 @@
 
 Este proyecto es una demostración básica de cómo estructurar aplicaciones Laravel utilizando una arquitectura en capas. Está desarrollado con Laravel 12 y tiene como objetivo servir como guía para implementar buenas prácticas en proyectos reales.
 La demo incluye un CRUD completo para la entidad cliente, expuesto a través de una API RESTful, y presenta una estructura modular orientada a servicios, validaciones formales, eventos y colas para tareas desacopladas.
+
 ---
 
 ## Funcionalidad Incluida
