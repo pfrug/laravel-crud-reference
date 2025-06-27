@@ -1,9 +1,7 @@
 # Descripción General
 
-Este proyecto es una demostración funcional de la arquitectura propuesta por CGI, desarrollada con Laravel 12. Sirve como referencia inicial y no representa el alcance final del sistema real.
-La arquitectura está diseñada para aplicaciones desacopladas, orientadas a servicios, y con un enfoque en buenas prácticas de desarrollo backend.
-Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expuesto a través de una API RESTful.
-
+Este proyecto es una demostración básica de cómo estructurar aplicaciones Laravel utilizando una arquitectura en capas. Está desarrollado con Laravel 12 y tiene como objetivo servir como guía para implementar buenas prácticas en proyectos reales.
+La demo incluye un CRUD completo para la entidad cliente, expuesto a través de una API RESTful, y presenta una estructura modular orientada a servicios, validaciones formales, eventos y colas para tareas desacopladas.
 ---
 
 ## Funcionalidad Incluida
@@ -23,7 +21,8 @@ Esta demo implementa un CRUD completo para entidades de tipo **cliente**, expues
 
 ## Capas de Arquitectura
 
-Con esta demo se pretende establecer una guía de referencia para la implementación de una arquitectura en capas recomendada para el desarrollo del sistema final. El objetivo es ilustrar cómo estructurar un proyecto Laravel utilizando componentes desacoplados que favorezcan la escalabilidad, la mantenibilidad y la separación de responsabilidades. Estas capas, agregadas manualmente sobre la estructura básica del framework, representan una forma de organización que facilita el trabajo en equipo, las pruebas automatizadas y la evolución del sistema a largo plazo.
+Esta demo busca servir como referencia práctica para estructurar aplicaciones Laravel con una arquitectura en capas. Las capas implementadas no son generadas por defecto por el framework, sino incorporadas manualmente para fomentar un diseño modular, mantenible y escalable.
+Cada componente (servicios, eventos, validaciones, etc.) está aislado según su responsabilidad, lo que facilita la evolución del sistema, el trabajo en equipo y la implementación de pruebas automatizadas.
 
 - **Events**: para emitir acciones del sistema de forma desacoplada.
 - **Listeners**: capturan y manejan eventos, como el envío de correos.
